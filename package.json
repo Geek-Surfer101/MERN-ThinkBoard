@@ -1,13 +1,18 @@
 {
   "name": "mern-thinkboard",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "npm run start --prefix backend"
+    "dev": "echo 'Run backend and frontend separately for dev'",
+    "build": "cd frontend && npm install && npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "dependencies": {
+    "@clerk/clerk-sdk-node": "^4.13.23",
+    "@upstash/ratelimit": "^2.0.5",
+    "@upstash/redis": "^1.34.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.18.2",
+    "mongoose": "^8.14.3"
+  }
 }

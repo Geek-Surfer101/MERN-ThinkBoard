@@ -32,16 +32,23 @@ app.use(rateLimiter);
 
 app.use("/api/notes", notesRoutes);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-  });
-}
+// Removed static serving for Vercel deployment as vercel.json handles routing
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "../frontend/dist")));
+//
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+//   });
+// }
 
-connectDB().then(() => {
+// Connect to DB (Mongoose buffers requests until connected)
+connectDB();
+
+if (process.env.NODE_ENV !== "production") {
   app.listen(PORT, () => {
     console.log("Server started on PORT:", PORT);
   });
-});
+}
+
+export default app;
